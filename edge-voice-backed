@@ -1,0 +1,81 @@
+import sounddevice as sd
+import soundfile as sf
+import os
+
+SAMPLE_RATE = 16000
+DURATION = 2.5
+
+OUTPUT_DIR = "VYOM_dataset/negative/commands"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+commands = [
+    "Turn on the light",
+    "Turn off the light",
+    "Turn on the fan",
+    "Turn off the fan",
+    "Open the door",
+    "Close the door",
+    "Play music",
+    "Stop the music",
+    "Start the fan",
+    "Stop the fan",
+    "Set the light to fifty percent",
+    "Make the room brighter",
+    "Make the room darker",
+    "Turn on the bedroom light",
+    "Turn off the bedroom light",
+    "Turn on the kitchen light",
+    "Turn off the kitchen light",
+    "Switch on the AC",
+    "Switch off the AC",
+    "Increase the temperature",
+    "What is the weather",
+    "What time is it",
+    "Play a song",
+    "Stop playing",
+    "Tell me the news",
+    "Open the window",
+    "Close the window",
+    "Call my phone",
+    "Set a timer",
+    "Cancel the timer"
+]
+
+print("===================================")
+print(" VYOM NEGATIVE COMMAND RECORDER")
+print("===================================")
+print("Format: 16 kHz / Mono / 16-bit WAV")
+print("IMPORTANT: Do NOT say VYOM.")
+print()
+
+for i, command in enumerate(commands, start=1):
+
+    print(f"\n[{i}/{len(commands)}]")
+    print(f'Say: "{command}"')
+
+    input("Press ENTER to record...")
+
+    print("Recording...")
+    
+    audio = sd.rec(
+        int(DURATION * SAMPLE_RATE),
+        samplerate=SAMPLE_RATE,
+        channels=1,
+        dtype="float32"
+    )
+
+    sd.wait()
+
+    filename = f"command_{i:03d}.wav"
+    filepath = os.path.join(OUTPUT_DIR, filename)
+
+    sf.write(
+        filepath,
+        audio,
+        SAMPLE_RATE,
+        subtype="PCM_16"
+    )
+
+    print("Saved:", filepath)
+
+print("\nFinished recording commands!")
