@@ -1,3 +1,23 @@
+<<<<<<< HEAD
 .DS_Store
 *.o
 *.bin
+=======
+*.wav
+__pycache__/
+.venv/
+venv/
+.DS_Store
+
+# Datasets and archives
+VYOM_dataset/
+wakeword_dataset/
+*.zip
+
+# Generated analysis files
+*.png
+*.npy
+
+# Generated model header
+vyom_model.h
+>>>>>>> 949991ed6f476d3a98ede33e624e1df6e2186450
